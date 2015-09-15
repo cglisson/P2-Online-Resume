@@ -38,50 +38,7 @@ var bio = {
 		},
     "picture" : "images/fry.jpg",
     "welcomeMessage" : "I am an aspiring Front-end Web Developer who is continually learning.",
-    "skills" : ["Programming", "HTML", "Javascript", "CSS", "Java", "C++", "Microsoft Office", "Customer Service"],
-	displayContactInfo : function() {
-		var keys = [];
-		for (var key in this.contacts) {
-			keys.push(key);	
-		}
-		var topContacts = "#topContacts";
-		
-		
-		for (contact in this.contacts) {
-			var formattedContact = "";
-			var topContacts = "#topContacts";
-			
-			if (contact === "mobile") {
-				formattedContact = replaceData(HTMLmobile, this.contacts[contact]);
-				addFormattedStrings(topContacts, formattedContact , true);
-			} else if (contact === "email") {
-				formattedContact = replaceData(HTMLemail, this.contacts[contact]);
-				addFormattedStrings(topContacts, formattedContact , true);
-			} else if (contact === "twitter") {
-				formattedContact = replaceData(HTMLtwitter, this.contacts[contact]);
-				addFormattedStrings(topContacts, formattedContact , true);
-			} else if (contact === "github") {
-				formattedContact = replaceData(HTMLgithub, this.contacts[contact]);
-				addFormattedStrings(topContacts, formattedContact , true);
-			} else if (contact === "location") {
-				formattedContact = replaceData(HTMLlocation, this.contacts[contact]);
-				addFormattedStrings(topContacts, formattedContact , true);
-			} else if (contact === "blog") {
-				formattedContact = replaceData(HTMLblog, this.contacts[contact]);
-				addFormattedStrings(topContacts, formattedContact , true);
-			} else {
-				formattedContact = replaceData(HTMLcontactGeneric, this.contacts[contact]).replace("%contact%", contact);
-				addFormattedStrings(topContacts, formattedContact , true);
-			}
-		}
-	},
-	displaySkills : function() {
-		addFormattedStrings("#header", HTMLskillsStart, true);
-		for(skill in bio.skills){
-			var skill = replaceData(HTMLskills, bio.skills[skill]);
-			addFormattedStrings("#skills", skill, true);
-		}
-	}
+    "skills" : ["Programming", "HTML", "Javascript", "CSS", "Java", "C++", "Microsoft Office", "Customer Service"]
 };
 
 // Create a work object which includes job information of each employer.
@@ -207,13 +164,54 @@ bio.display = function() {
 	addFormattedStrings(header, formattedHeaderName, false);	
 	addFormattedStrings(header, formattedHeaderPic, true);
 	
-	// Display skills
-	if (bio.skills.length > 0) {
-		bio.displaySkills();
+	// Display contact information
+	var keys = [];
+	for (var key in this.contacts) {
+		keys.push(key);	
+	}
+	var topContacts = "#topContacts";
+	var footerContacts = "#footerContacts";
+	
+	for (var contact in this.contacts) {
+		var formattedContact = "";
+		
+		if (contact === "mobile") {
+			formattedContact = replaceData(HTMLmobile, this.contacts[contact]);
+			addFormattedStrings(topContacts, formattedContact , true);
+			addFormattedStrings(footerContacts, formattedContact, true);
+		} else if (contact === "email") {
+			formattedContact = replaceData(HTMLemail, this.contacts[contact]);
+			addFormattedStrings(topContacts, formattedContact , true);
+			addFormattedStrings(footerContacts, formattedContact, true);
+		} else if (contact === "twitter") {
+			formattedContact = replaceData(HTMLtwitter, this.contacts[contact]);
+			addFormattedStrings(topContacts, formattedContact , true);
+			addFormattedStrings(footerContacts, formattedContact, true);
+		} else if (contact === "github") {
+			formattedContact = replaceData(HTMLgithub, this.contacts[contact]);
+			addFormattedStrings(topContacts, formattedContact , true);
+			addFormattedStrings(footerContacts, formattedContact, true);
+		} else if (contact === "location") {
+			formattedContact = replaceData(HTMLlocation, this.contacts[contact]);
+			addFormattedStrings(topContacts, formattedContact , true);
+			addFormattedStrings(footerContacts, formattedContact, true);
+		} else if (contact === "blog") {
+			formattedContact = replaceData(HTMLblog, this.contacts[contact]);
+			addFormattedStrings(topContacts, formattedContact , true);
+			addFormattedStrings(footerContacts, formattedContact, true);
+		} else {
+			formattedContact = replaceData(HTMLcontactGeneric, this.contacts[contact]).replace("%contact%", contact);
+			addFormattedStrings(topContacts, formattedContact , true);
+			addFormattedStrings(footerContact, formattedContact, true);
+		}
 	}
 	
-	// Display contact information		
-	bio.displayContactInfo();
+	// Display skills	
+	addFormattedStrings("#header", HTMLskillsStart, true);
+	for(var skill in bio.skills){
+		var skill = replaceData(HTMLskills, bio.skills[skill]);
+		addFormattedStrings("#skills", skill, true);
+	}
 }
 
 
@@ -259,7 +257,7 @@ projects.display = function() {
 			addFormattedStrings(projectEntry, formattedDescription, true);
 			
 			// Display images
-			for (image in projects.projects[project].images) {
+			for (var image in projects.projects[project].images) {
 				var img = replaceData(HTMLprojectImage, projects.projects[project].images[image]);
 				addFormattedStrings(projectEntry, img, true);
 			}
@@ -291,7 +289,7 @@ education.display = function() {
 	addFormattedStrings("#education", HTMLonlineStart, true);
 	addFormattedStrings(".online-entry", HTMLonlineClasses, true);
 	
-	for (onlineSchool in education.onlineCourses) {
+	for (var onlineSchool in education.onlineCourses) {
 		var onlineTitle = replaceData(HTMLonlineTitle, this.onlineCourses[onlineSchool].title) +
 			replaceData(HTMLonlineSchool, this.onlineCourses[onlineSchool].school);
 		var onlineDates = replaceData(HTMLonlineDates, this.onlineCourses[onlineSchool].dates);
